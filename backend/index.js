@@ -6,8 +6,10 @@ const app = express();
 // Middleware to get data from api
 app.use(express.json());
 
-app.post("/register",(req,resp)=>{
-    resp.send(req.body)
+app.post("/register", async (req,resp)=>{
+    let user = new User(req.body);
+    let result = await user.save();
+    resp.send(result);
 });
 
 app.listen(5000)
